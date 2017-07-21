@@ -16,6 +16,10 @@ struct Note: Equatable {
         return [Note.textKey : text]
     }
     
+    func containsText(text: String) -> Bool {
+        return self.text.contains(text)
+    }
+    
     // MARK: - Equatable Protocol
     static func ==(lhs: Note, rhs: Note) -> Bool {
         if lhs.text == rhs.text {
