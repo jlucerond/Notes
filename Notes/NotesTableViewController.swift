@@ -10,7 +10,28 @@ import UIKit
 
 class NotesTableViewController: UITableViewController {
     
+    var arrayToUse: [Note] {
+        guard let text = searchButtonTextField.text else {
+            return NotesController.shared.arrayOfNotes
+        }
+        
+        if text.isEmpty {
+            return NotesController.shared.arrayOfNotes
+        } else {
+            return searchedArray
+        }
+            
+    }
+    
+    var searchedArray: [Note] {
+        guard let text = searchButtonTextField.text else {
+            return []
+        }
+        return NotesController.shared.searchForNotesWith(text: text)
+    }
+    
     @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var searchButtonTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -28,6 +49,10 @@ class NotesTableViewController: UITableViewController {
             isEditing = true
         }
     }
+    @IBAction func searchButtonWasTyped(_ sender: UITextField) {
+        
+        tableView.reloadData()
+    }
 }
 
 // MARK: - Table view data source
@@ -35,12 +60,12 @@ extension NotesTableViewController {
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return NotesController.shared.arrayOfNotes.count
+        return arrayToUse.count
     }
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let note = NotesController.shared.arrayOfNotes[indexPath.row]
+        let note = arrayToUse[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteCell", for: indexPath)
         cell.textLabel?.text = note.text
@@ -52,7 +77,7 @@ extension NotesTableViewController {
                             commit editingStyle: UITableViewCellEditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let noteToDelete = NotesController.shared.arrayOfNotes[indexPath.row]
+            let noteToDelete = arrayToUse[indexPath.row]
             NotesController.shared.delete(note: noteToDelete)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -76,7 +101,7 @@ extension NotesTableViewController {
         if segue.identifier == "editNote" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
             notesDetailViewController.title = "Edit Note"
-            let noteToEdit = NotesController.shared.arrayOfNotes[indexPath.row]
+            let noteToEdit = arrayToUse[indexPath.row]
             notesDetailViewController.note = noteToEdit
             
         } else if segue.identifier == "addNote" {
@@ -84,11 +109,6 @@ extension NotesTableViewController {
         }
     }
 }
-
-
-
-
-
 
 
 

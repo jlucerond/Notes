@@ -25,6 +25,12 @@ class NotesController {
         saveData()
     }
     
+    /// Returns an array of notes that include the selected text
+    func searchForNotesWith(text: String) -> [Note] {
+        
+        return arrayOfNotes.filter{$0.containsText(text: text)}
+    }
+    
     /// Updates an existing note
     func update(note: Note, withNewText text: String){
         guard let index = arrayOfNotes.index(of: note),
