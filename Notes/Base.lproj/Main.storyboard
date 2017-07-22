@@ -21,22 +21,40 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gg5-x0-SXc">
+                                <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="gkC-FQ-Vjw">
                                     <rect key="frame" x="20" y="20" width="335" height="40"/>
-                                    <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <action selector="searchButtonWasTyped:" destination="muQ-mc-nOW" eventType="editingChanged" id="Uxp-cB-VDn"/>
-                                    </connections>
-                                </textField>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gg5-x0-SXc">
+                                            <rect key="frame" x="0.0" y="10" width="305" height="30"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="searchButtonWasTyped:" destination="muQ-mc-nOW" eventType="editingChanged" id="Uxp-cB-VDn"/>
+                                            </connections>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIq-JI-mlb">
+                                            <rect key="frame" x="305" y="11" width="30" height="29"/>
+                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="14"/>
+                                            <state key="normal" title="X">
+                                                <color key="titleColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <state key="disabled">
+                                                <color key="titleColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="cancelSearchButtonWasPressed:" destination="muQ-mc-nOW" eventType="touchUpInside" id="1dw-xx-w2q"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="Gg5-x0-SXc" secondAttribute="bottom" constant="20" id="Xsd-gH-cYD"/>
-                                <constraint firstAttribute="trailing" secondItem="Gg5-x0-SXc" secondAttribute="trailing" constant="20" id="kk8-zB-825"/>
-                                <constraint firstItem="Gg5-x0-SXc" firstAttribute="leading" secondItem="m6Y-j6-Tih" secondAttribute="leading" constant="20" id="pg6-KW-3a9"/>
-                                <constraint firstItem="Gg5-x0-SXc" firstAttribute="top" secondItem="m6Y-j6-Tih" secondAttribute="top" constant="20" id="wA0-fd-wdd"/>
+                                <constraint firstItem="gkC-FQ-Vjw" firstAttribute="top" secondItem="m6Y-j6-Tih" secondAttribute="top" constant="20" id="4WP-uV-3D2"/>
+                                <constraint firstItem="gkC-FQ-Vjw" firstAttribute="leading" secondItem="m6Y-j6-Tih" secondAttribute="leading" constant="20" id="UVM-nt-c8d"/>
+                                <constraint firstAttribute="bottom" secondItem="gkC-FQ-Vjw" secondAttribute="bottom" constant="20" id="ZR4-zs-b9G"/>
+                                <constraint firstAttribute="trailing" secondItem="gkC-FQ-Vjw" secondAttribute="trailing" constant="20" id="v0w-V7-2W2"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -79,6 +97,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelSearchButton" destination="wIq-JI-mlb" id="nE4-A2-LyF"/>
                         <outlet property="editButton" destination="wKK-nW-ddq" id="M5v-ua-K1P"/>
                         <outlet property="searchButtonTextField" destination="Gg5-x0-SXc" id="ePQ-kZ-2TO"/>
                     </connections>
@@ -87,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="474" y="116"/>
         </scene>
-        <!--fdsafdsa-->
+        <!--NoteDetail-->
         <scene sceneID="ZF0-OR-4Fy">
             <objects>
-                <viewController title="fdsafdsa" id="afW-Mg-3I3" customClass="NotesDetailViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="NoteDetail" id="afW-Mg-3I3" customClass="NotesDetailViewController" customModule="Notes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mD0-oa-Bty"/>
                         <viewControllerLayoutGuide type="bottom" id="zQ5-Mh-nDM"/>

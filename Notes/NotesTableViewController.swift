@@ -11,16 +11,11 @@ import UIKit
 class NotesTableViewController: UITableViewController {
     
     var arrayToUse: [Note] {
-        guard let text = searchButtonTextField.text else {
+        guard let text = searchButtonTextField.text, !text.isEmpty else {
             return NotesController.shared.arrayOfNotes
         }
         
-        if text.isEmpty {
-            return NotesController.shared.arrayOfNotes
-        } else {
             return searchedArray
-        }
-            
     }
     
     var searchedArray: [Note] {
@@ -32,9 +27,11 @@ class NotesTableViewController: UITableViewController {
     
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var searchButtonTextField: UITextField!
+    @IBOutlet weak var cancelSearchButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        clearSearch()
         tableView.reloadData()
     }
     
@@ -50,8 +47,18 @@ class NotesTableViewController: UITableViewController {
         }
     }
     @IBAction func searchButtonWasTyped(_ sender: UITextField) {
-        
+        cancelSearchButton.isEnabled = !searchButtonTextField.text!.isEmpty
         tableView.reloadData()
+    }
+    
+    @IBAction func cancelSearchButtonWasPressed(_ sender: UIButton) {
+        clearSearch()
+        tableView.reloadData()
+    }
+    
+    func clearSearch() {
+        searchButtonTextField.text = ""
+        cancelSearchButton.isEnabled = false
     }
 }
 
@@ -108,6 +115,7 @@ extension NotesTableViewController {
             notesDetailViewController.title = "New Note"
         }
     }
+    
 }
 
 

@@ -17,7 +17,7 @@ struct Note: Equatable {
     }
     
     func containsText(text: String) -> Bool {
-        return self.text.contains(text)
+        return self.text.lowercased().contains(text.lowercased())
     }
     
     // MARK: - Equatable Protocol

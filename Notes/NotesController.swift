@@ -28,7 +28,7 @@ class NotesController {
     /// Returns an array of notes that include the selected text
     func searchForNotesWith(text: String) -> [Note] {
         
-        return arrayOfNotes.filter{$0.containsText(text: text)}
+        return arrayOfNotes.filter{ $0.containsText(text: text) }
     }
     
     /// Updates an existing note
